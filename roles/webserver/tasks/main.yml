@@ -1,0 +1,7 @@
+# handles server protection and configuration
+
+- include: security.yml
+- include: nginx.yml
+- include: git.yml
+- include: dependencies.yml
+- include: wsgi.yml

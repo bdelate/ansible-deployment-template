@@ -1,0 +1,27 @@
+# install and configure PostgreSQL database
+
+- name: ensure postgresql database packages are installed
+  apt:
+    name: ['postgresql', 'libpq-dev', 'python3-psycopg2', 'postgresql-client', 'postgresql-client-common']
+    update_cache: yes
+  become: yes
+
+- name: create database instance
+  postgresql_db: name={{ db_name }}
+  become: yes
+  become_user: postgres
+
+- name: configure separate PostgreSQL user
+  postgresql_user: db={{ db_name }} name={{ db_user }}
+                   password={{ db_password }} priv=ALL
+                   role_attr_flags=NOSUPERUSER
+  become: yes
+  become_user: postgres
+
+- name: allow connections from the webserver
+  lineinfile:
+    path: /etc/postgresql/10/main/pg_hba.conf
+    state: present
+    insertafter: "# TYPE  DATABASE        USER            ADDRESS                 METHOD"
+    line:        "host    {{ db_name }}     {{ db_user }}        {{ web_server_ip }}          trust"
+  become: yes

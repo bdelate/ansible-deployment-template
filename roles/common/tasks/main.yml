@@ -1,0 +1,3 @@
+# handles server protection and configuration
+
+- include: security.yml

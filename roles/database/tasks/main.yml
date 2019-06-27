@@ -1,0 +1,4 @@
+# handles server protection and configuration for the database server
+
+- include: security.yml
+- include: postgresql.yml
