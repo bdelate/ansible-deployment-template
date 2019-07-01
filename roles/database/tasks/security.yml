@@ -1,5 +1,5 @@
 # install security configuration
 
-- name: enable PostgreSQL access
+- name: allow port 5432 on firewall for PostgreSQL access
   ufw: rule=allow port=5432
   become: yes

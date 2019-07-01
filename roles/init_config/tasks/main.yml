@@ -10,6 +10,7 @@
   user:
     name: "{{ deploy_user }}"
     group: "{{ deploy_group }}"
+    password: "{{ deploy_user_encrypted_password }}"
     shell: "/bin/bash"
     state: present
 

@@ -4,7 +4,15 @@
   apt: name=supervisor state=present update_cache=yes
   become: yes
 
-- name: set Supervisor configuration
+- name: create gunicorn config directory
+  file: path={{ gunicorn_dir }} state=directory
+
+- name: copy gunicorn config file
+  template: src=gunicorn_conf.py
+            dest={{ gunicorn_dir }}/gunicorn_conf.py
+  become: true
+
+- name: copy Supervisor configuration
   template: src=supervisor.conf
             dest=/etc/supervisor/conf.d/{{ app_name }}.conf
   become: yes

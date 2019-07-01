@@ -23,5 +23,17 @@
     path: /etc/postgresql/10/main/pg_hba.conf
     state: present
     insertafter: "# TYPE  DATABASE        USER            ADDRESS                 METHOD"
-    line:        "host    {{ db_name }}     {{ db_user }}        {{ web_server_ip }}          trust"
+    line:        "host    {{ db_name }}     {{ db_user }}        {{ web_server_ip }}/32          md5"
   become: yes
+
+- name: listen for connections on localhost and database_server_ip
+  replace:
+    destfile: /etc/postgresql/10/main/postgresql.conf
+    backup: no
+    regexp: "^#listen_addresses = 'localhost'"
+    replace: "listen_addresses = '{{ database_server_ip }}, localhost'"
+  become: yes
+
+- name: restart postgresql
+  service: name=postgresql state=restarted
+  become: true

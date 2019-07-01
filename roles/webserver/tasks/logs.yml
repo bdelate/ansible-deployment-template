@@ -1,0 +1,4 @@
+# Log file locations
+
+- name: create log file directory for gunicorn, supervisor and django
+  file: path={{ log_dir }} state=directory

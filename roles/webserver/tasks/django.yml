@@ -1,0 +1,17 @@
+- name: copy django settings file
+  template: src=django_settings.py
+            dest={{ django_settings_dir }}/prod.py
+
+- name: run Django migrations
+  django_manage:
+    command: migrate
+    app_path: "{{ manage_py_dir }}"
+    settings: "{{ django_settings_module }}"
+    virtualenv: "{{ venv_dir }}"
+
+- name: run Django collectstatic
+  django_manage:
+    command: collectstatic
+    app_path: "{{ manage_py_dir }}"
+    settings: "{{ django_settings_module }}"
+    virtualenv: "{{ venv_dir }}"

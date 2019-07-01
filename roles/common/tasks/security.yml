@@ -13,3 +13,14 @@
 - name: enable firewall itself
   ufw: state=enabled
   become: yes
+
+- name: write custom fail2ban jail local config
+  template: src=fail2ban_jail.conf
+            dest=/etc/fail2ban/jail.local
+  become: yes
+
+- name: restart fail2ban
+  service:
+    name: fail2ban
+    state: restarted
+  become: yes

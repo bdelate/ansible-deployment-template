@@ -1,9 +1,9 @@
 # install security configuration
 
-- name: enable HTTP access
+- name: enable HTTP access on firewall
   ufw: rule=allow port=80
   become: yes
 
-- name: enable HTTPS access
+- name: enable HTTPS access on firewall
   ufw: rule=allow port=443
   become: yes
