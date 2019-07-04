@@ -87,5 +87,5 @@ ansible-playbook ./web_and_database.yml --ask-vault-pass --private-key=~/.ssh/{{
 
 ## To start the playbook from a specific task (skipping those before):
  ```bash
-ansible-playbook ./web_and_dabase.yml --private-key=~/.ssh/{{ ssh_key_name }} -i hosts --start-at-task="clone or pull latest code"
+ ansible-playbook ./web_and_database.yml --ask-vault-pass --private-key=~/.ssh/{{ ssh_key_name }} -i hosts --start-at-task="clone or pull latest code"
 ```
