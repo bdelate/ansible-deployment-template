@@ -37,7 +37,7 @@
   when: not certs.stat.exists
 
 - name: create certificate with Lets Encrypt command
-  shell: "letsencrypt certonly --standalone -d {{ fqdn }} -w {{ web_serve_dir }} -m {{ ssl_cert_email }} --agree-tos --renew-by-default --non-interactive"
+  shell: "letsencrypt certonly --standalone -d {{ fqdn }} -d {{ domain }} -w {{ web_serve_dir }} -m {{ ssl_cert_email }} --agree-tos --renew-by-default --non-interactive"
   become: yes
   when: not certs.stat.exists
 
